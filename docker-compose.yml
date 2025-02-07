@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+  yummy_api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: yummy-api
+    container_name: yummy-api-runtime
+    ports:
+      - 8000:8000
+    restart: on-failure
+    volumes:
+      - .:/app
+    depends_on: 
+      - mongodb
+
+# Database
+  mongodb:
+    image: mongodb/mongodb-community-server
+    ports:
+      - 27017:27017
